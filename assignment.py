@@ -2,20 +2,19 @@ def create_dic(a,b):
     dic[a]= b
 
 def dictionary_creator(given_string):   
-
     #to remove data before cat key
     pos_cat=  given_string.find("cat")
 
-    #to locate from from msg key starts and ends in string
+    #to locate from msg key starts and ends position in string
     pos_msg= given_string.find("msg")
     pos_host = given_string.find("dhost")
 
-    #creating list ny spliting strings
+    #creating list by spliting strings based on msg position
     first_list= given_string[pos_cat:pos_msg].split(" ")
     second_list = given_string[pos_msg: pos_host].split(" ")
     third_list = given_string[pos_host:].split(" ")
 
-    #create list , which comtains all the 3 lists
+    #create list , which contains all the 3 lists
     new_list =[first_list,second_list, third_list]
 
     for i in range(0,len(new_list)):
@@ -29,10 +28,10 @@ def dictionary_creator(given_string):
                 if len_sublist==2:
                     create_dic(sub_list[0],sub_list[1])
 
-                #if len_sublist is greater than 2, than its link spliting to pecies due to presence of "="
+                #if len_sublist is greater than 2, then its link spliting to pecies due to presence of "="
                 elif len_sublist> 2:
                     b = ""
-                    #cs2 and cs4 has link as value , so concatenting it
+                    #cs2 and cs4 has link as value , so concatenating it
                     if sub_list[0]== "cs2" or sub_list[0]== "cs4":
                             for i in sub_list[1:]:
                                 if b=="":
@@ -40,14 +39,14 @@ def dictionary_creator(given_string):
                                 else:
                                     b = b+"="+i
                     else:
-                        print("its not cs2 or Cs4")
+                        print("its not cs2 or cs4")
                     create_dic(sub_list[0],b)
 
         #this is msg list, broken into peices due to presence of space
         else:
             msg_list =given_string[pos_msg: pos_host].split('=')
             b=""
-            #so concatenting it
+            #so concatenating it
             for i in msg_list[1:]:
                 if b=="":
                     b=b+i
